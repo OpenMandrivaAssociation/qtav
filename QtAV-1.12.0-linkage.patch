@@ -1,0 +1,17 @@
+--- QtAV-1.12.0/src/CMakeLists.txt.omv~	2017-06-27 01:27:22.682491709 +0200
++++ QtAV-1.12.0/src/CMakeLists.txt	2017-06-27 01:29:22.137404488 +0200
+@@ -217,9 +217,14 @@ if(HAVE_OPENGL)
+   if(WIN32 AND NOT DYNAMIC_GL AND NOT OPENGLES) # msys2
+     find_package(OpenGL REQUIRED)
+     list(APPEND EXTRA_LIBS ${OPENGL_gl_LIBRARY})
++  else()
++    list(APPEND EXTRA_LIBS GL)
+   endif()
+ endif()
+ 
++# for capi
++list(APPEND EXTRA_LIBS dl)
++
+ file(GLOB SDK_HEADERS QtAV/*.h)
+ list(APPEND SDK_HEADERS QtAV/QtAV)
+ file(GLOB SDK_PRIVATE_HEADERS QtAV/private/*.h)
