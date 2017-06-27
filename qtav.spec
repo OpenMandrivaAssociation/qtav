@@ -89,8 +89,24 @@ mv uchardet-* contrib/uchardet
 %install
 %ninja_install -C build
 
+mkdir -p %{buildroot}%{_datadir}/applications
+cat >%{buildroot}%{_datadir}/applications/%{name}.QMLPlayer.desktop <<'EOF'
+[Desktop Entry]
+Categories=Qt;AudioVideo;Player;Video;
+Exec=QMLPlayer %U
+GenericName=Media Player
+Comment=Media player
+MimeType=audio/ac3;audio/mp4;audio/mpeg;audio/vnd.rn-realaudio;audio/vorbis;audio/x-adpcm;audio/x-matroska;audio/x-mp2;audio/x-mp3;audio/x-ms-wma;audio/x-vorbis;audio/x-wav;audio/mpegurl;audio/x-mpegurl;audio/x-pn-realaudio;audio/x-scpls;audio/aac;audio/flac;audio/ogg;video/avi;video/mp4;video/flv;video/mpeg;video/quicktime;video/vnd.rn-realvideo;video/x-matroska;video/x-ms-asf;video/x-msvideo;video/x-ms-wmv;video/x-ogm;video/x-theora;video/webm;
+Name=QMLPlayer
+Type=Application
+X-KDE-StartupNotify=true
+EOF
+sed -e 's,QMLPlayer,Player,g' %{buildroot}%{_datadir}/applications/%{name}.QMLPlayer.desktop >%{buildroot}%{_datadir}/applications/%{name}.Player.desktop
+chmod +x %{buildroot}%{_datadir}/applications/*.desktop
+
 %files
 %{_bindir}/*
+%{_datadir}/applications/*
 
 %files -n %{libname}
 %{_libdir}/libQtAV.so.%{major}*
