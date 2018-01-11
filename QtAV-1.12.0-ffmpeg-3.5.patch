@@ -1,0 +1,76 @@
+--- QtAV-1.12.0/src/AVMuxer.cpp.omv~	2018-01-11 13:12:18.609812339 +0100
++++ QtAV-1.12.0/src/AVMuxer.cpp	2018-01-11 13:12:24.326827971 +0100
+@@ -122,7 +122,7 @@ AVStream *AVMuxer::Private::addStream(AV
+     c->time_base = s->time_base;
+     /* Some formats want stream headers to be separate. */
+     if (ctx->oformat->flags & AVFMT_GLOBALHEADER)
+-        c->flags |= CODEC_FLAG_GLOBAL_HEADER;
++        c->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+     // expose avctx to encoder and set properties in encoder?
+     // list codecs for a given format in ui
+     return s;
+--- QtAV-1.12.0/src/codec/audio/AudioEncoderFFmpeg.cpp.omv~	2018-01-11 13:16:01.083405596 +0100
++++ QtAV-1.12.0/src/codec/audio/AudioEncoderFFmpeg.cpp	2018-01-11 13:16:43.935527226 +0100
+@@ -153,8 +153,8 @@ bool AudioEncoderFFmpegPrivate::open()
+     } else {
+         buffer_size = frame_size*format_used.bytesPerSample()*format_used.channels()*2+200;
+     }
+-    if (buffer_size < FF_MIN_BUFFER_SIZE)
+-        buffer_size = FF_MIN_BUFFER_SIZE;
++    if (buffer_size < AV_INPUT_BUFFER_MIN_SIZE)
++        buffer_size = AV_INPUT_BUFFER_MIN_SIZE;
+     buffer.resize(buffer_size);
+     return true;
+ }
+--- QtAV-1.12.0/src/codec/video/VideoEncoderFFmpeg.cpp.omv~	2018-01-11 13:13:04.865938164 +0100
++++ QtAV-1.12.0/src/codec/video/VideoEncoderFFmpeg.cpp	2018-01-11 13:15:40.767352548 +0100
+@@ -245,7 +245,7 @@ bool VideoEncoderFFmpegPrivate::open()
+     applyOptionsForContext();
+     AV_ENSURE_OK(avcodec_open2(avctx, codec, &dict), false);
+     // from mpv ao_lavc
+-    const int buffer_size = qMax<int>(qMax<int>(width*height*6+200, FF_MIN_BUFFER_SIZE), sizeof(AVPicture));//??
++    const int buffer_size = qMax<int>(qMax<int>(width*height*6+200, AV_INPUT_BUFFER_MIN_SIZE), sizeof(AVPicture));//??
+     buffer.resize(buffer_size);
+     return true;
+ }
+--- QtAV-1.12.0/src/filter/LibAVFilter.cpp.omv~	2018-01-11 13:11:49.441732212 +0100
++++ QtAV-1.12.0/src/filter/LibAVFilter.cpp	2018-01-11 13:11:59.070758733 +0100
+@@ -120,7 +120,7 @@ public:
+         // pixel_aspect==sar, pixel_aspect is more compatible
+         QString buffersrc_args = args;
+         qDebug("buffersrc_args=%s", buffersrc_args.toUtf8().constData());
+-        AVFilter *buffersrc  = avfilter_get_by_name(video ? "buffer" : "abuffer");
++        AVFilter const *buffersrc  = avfilter_get_by_name(video ? "buffer" : "abuffer");
+         Q_ASSERT(buffersrc);
+         AV_ENSURE_OK(avfilter_graph_create_filter(&in_filter_ctx,
+                                                buffersrc,
+@@ -128,7 +128,7 @@ public:
+                                                filter_graph)
+                      , false);
+         /* buffer video sink: to terminate the filter chain. */
+-        AVFilter *buffersink = avfilter_get_by_name(video ? "buffersink" : "abuffersink");
++        AVFilter const *buffersink = avfilter_get_by_name(video ? "buffersink" : "abuffersink");
+         Q_ASSERT(buffersink);
+         AV_ENSURE_OK(avfilter_graph_create_filter(&out_filter_ctx, buffersink, "out",
+                                            NULL, NULL, filter_graph)
+--- QtAV-1.12.0/src/QtAV/private/AVCompat.h.omv~	2018-01-11 13:11:02.825602790 +0100
++++ QtAV-1.12.0/src/QtAV/private/AVCompat.h	2018-01-11 13:11:06.774613822 +0100
+@@ -79,7 +79,6 @@ extern "C"
+ #endif //QTAV_HAVE(AVRESAMPLE)
+ 
+ #if QTAV_HAVE(AVFILTER)
+-#include <libavfilter/avfiltergraph.h> /*code is here for old version*/
+ #include <libavfilter/avfilter.h>
+ #include <libavfilter/buffersink.h>
+ #include <libavfilter/buffersrc.h>
+--- QtAV-1.12.0/src/subtitle/SubtitleProcessorFFmpeg.cpp.omv~	2018-01-11 13:12:38.985867947 +0100
++++ QtAV-1.12.0/src/subtitle/SubtitleProcessorFFmpeg.cpp	2018-01-11 13:12:44.982884260 +0100
+@@ -249,7 +249,7 @@ bool SubtitleProcessorFFmpeg::processHea
+     codec_ctx->time_base.den = 1000;
+     if (!data.isEmpty()) {
+         av_free(codec_ctx->extradata);
+-        codec_ctx->extradata = (uint8_t*)av_mallocz(data.size() + FF_INPUT_BUFFER_PADDING_SIZE);
++        codec_ctx->extradata = (uint8_t*)av_mallocz(data.size() + AV_INPUT_BUFFER_PADDING_SIZE);
+         if (!codec_ctx->extradata)
+             return false;
+         codec_ctx->extradata_size = data.size();
