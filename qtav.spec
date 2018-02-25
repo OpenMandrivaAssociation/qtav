@@ -6,7 +6,7 @@
 
 Name: qtav
 Version: 1.12.0
-Release: 3.1
+Release: 3.2
 Source0: https://github.com/wang-bin/QtAV/archive/v%{version}.tar.gz
 Source1: https://github.com/wang-bin/capi/archive/6a5f3006533b79aa57a3a54cf9df4442a356dd48.tar.gz
 Source2: https://github.com/BYVoid/uchardet/archive/016eb18437793fbdd31149e1fe9fd73df3430d0f.tar.gz
@@ -34,6 +34,7 @@ BuildRequires: pkgconfig(libavfilter)
 BuildRequires: pkgconfig(libavdevice)
 BuildRequires: pkgconfig(libavresample)
 BuildRequires: pkgconfig(libswresample)
+BuildRequires: pkgconfig(libva) >= 1.0.0 
 BuildRequires: cmake
 BuildRequires: ninja
 
