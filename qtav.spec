@@ -9,7 +9,7 @@
 Name: qtav
 Version: 1.13.0
 Release: 1
-Source0: https://github.com/wang-bin/QtAV/archive/v%{version}/%{oname}-{version}.tar.gz
+Source0: https://github.com/wang-bin/QtAV/archive/v%{version}/%{oname}-%{version}.tar.gz
 Source1: https://github.com/wang-bin/capi/archive/6a5f3006533b79aa57a3a54cf9df4442a356dd48.tar.gz
 Source2: https://github.com/BYVoid/uchardet/archive/016eb18437793fbdd31149e1fe9fd73df3430d0f.tar.gz
 Patch0: QtAV-1.12.0-linkage.patch
@@ -76,7 +76,7 @@ Development files (Headers etc.) for %{name},
 a multimedia playback framework based on QtWidgets and FFmpeg
 
 %prep
-%setup -qn %{oname}-%{version} -a 1 -a 2
+%setup -q -n %{oname}-%{version} -a 1 -a 2
 %apply_patches
 rmdir contrib/capi contrib/uchardet
 mv capi-* contrib/capi
