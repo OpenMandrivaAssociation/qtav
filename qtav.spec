@@ -76,7 +76,7 @@ Development files (Headers etc.) for %{name},
 a multimedia playback framework based on QtWidgets and FFmpeg
 
 %prep
-%setup -qn QtAV-%{version} -a 1 -a 2
+%setup -qn %{oname}-%{version} -a 1 -a 2
 %apply_patches
 rmdir contrib/capi contrib/uchardet
 mv capi-* contrib/capi
