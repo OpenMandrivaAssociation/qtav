@@ -76,7 +76,7 @@ a multimedia playback framework based on QtWidgets and FFmpeg
 
 %prep
 %setup -q -n %{oname}-%{version} -a 1 -a 2
-%apply_patches
+%autopatch -p1
 rmdir contrib/capi contrib/uchardet
 mv capi-* contrib/capi
 mv uchardet-* contrib/uchardet
