@@ -1,0 +1,11 @@
+diff -up QtAV-1.13.0/qml/SGVideoNode.cpp.omv~ QtAV-1.13.0/qml/SGVideoNode.cpp
+--- QtAV-1.13.0/qml/SGVideoNode.cpp.omv~	2020-01-30 03:19:12.299848466 +0100
++++ QtAV-1.13.0/qml/SGVideoNode.cpp	2020-01-30 03:19:20.529848829 +0100
+@@ -25,6 +25,7 @@
+ #include "QtAV/VideoFrame.h"
+ #include <QtCore/QScopedPointer>
+ #include <QtGui/QOpenGLFunctions>
++#include <QtQuick/QSGMaterial>
+ #include <QtQuick/QSGMaterialShader>
+ 
+ // all in QSGRenderThread
