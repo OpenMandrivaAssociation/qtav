@@ -1,0 +1,11 @@
+diff -up QtAV-1.13.0/src/QtAV/FilterContext.h.omv~ QtAV-1.13.0/src/QtAV/FilterContext.h
+--- QtAV-1.13.0/src/QtAV/FilterContext.h.omv~	2020-03-27 15:18:53.635582421 +0100
++++ QtAV-1.13.0/src/QtAV/FilterContext.h	2020-03-27 15:19:02.563627354 +0100
+@@ -26,6 +26,7 @@
+ #include <QtCore/QByteArray>
+ #include <QtCore/QRect>
+ #include <QtGui/QPainter>
++#include <QtGui/QPainterPath>
+ /*
+  * QPainterFilterContext, D2DFilterContext, ...
+  */

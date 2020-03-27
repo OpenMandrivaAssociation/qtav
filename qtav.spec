@@ -8,13 +8,14 @@
 
 Name: qtav
 Version: 1.13.0
-Release: 2
+Release: 3
 Source0: https://github.com/wang-bin/QtAV/archive/v%{version}/%{oname}-%{version}.tar.gz
 Source1: https://github.com/wang-bin/capi/archive/6a5f3006533b79aa57a3a54cf9df4442a356dd48.tar.gz
 Source2: https://github.com/BYVoid/uchardet/archive/016eb18437793fbdd31149e1fe9fd73df3430d0f.tar.gz
 Patch0: QtAV-1.12.0-linkage.patch
 Patch1: qtav-1.12.0-fs-prefixes.patch
 Patch2:	QtAV-1.13.0-fix-build-with-qt-5.14.patch
+Patch3: qtav-1.13.0-qt-5.15.patch
 Summary: Multimedia playback framework based on Qt and FFmpeg
 URL: http://qtav.org/
 License: LGPL
