@@ -29,14 +29,7 @@ BuildRequires: cmake(Qt5Qml)
 BuildRequires: cmake(Qt5Quick)
 BuildRequires: cmake(Qt5Sql)
 BuildRequires: cmake(Qt5Widgets)
-BuildRequires: pkgconfig(libavformat)
-BuildRequires: pkgconfig(libavcodec)
-BuildRequires: pkgconfig(libswscale)
-BuildRequires: pkgconfig(libavutil)
-BuildRequires: pkgconfig(libavfilter)
-BuildRequires: pkgconfig(libavdevice)
-BuildRequires: pkgconfig(libavresample)
-BuildRequires: pkgconfig(libswresample)
+BuildRequires: ffmpeg-devel
 BuildRequires: pkgconfig(libva) >= 1.0.0 
 BuildRequires: cmake
 BuildRequires: ninja
