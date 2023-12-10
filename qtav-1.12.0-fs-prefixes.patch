@@ -1,13 +1,14 @@
---- QtAV-1.12.0/CMakeLists.txt.omv~	2017-06-27 01:44:34.048449378 +0200
-+++ QtAV-1.12.0/CMakeLists.txt	2017-06-27 01:46:49.061094581 +0200
-@@ -65,10 +65,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON) # for
+diff -up QtAV-master/CMakeLists.txt.2~ QtAV-master/CMakeLists.txt
+--- QtAV-master/CMakeLists.txt.2~	2023-12-10 23:49:37.396095964 +0100
++++ QtAV-master/CMakeLists.txt	2023-12-10 23:50:50.522967779 +0100
+@@ -72,10 +72,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON) # for
  # Instruct CMake to run moc automatically when needed.
  set(CMAKE_AUTOMOC ON)
  if(NOT CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 -  set(QTAV_INSTALL_HEADERS ${CMAKE_INSTALL_PREFIX}/include)
 -  set(QTAV_INSTALL_LIBS ${CMAKE_INSTALL_PREFIX}/lib)
 -  set(QTAV_INSTALL_BINS ${CMAKE_INSTALL_PREFIX}/bin)
--  set(QTAV_INSTALL_QML ${CMAKE_INSTALL_PREFIX}/qml)
+-  set(QTAV_INSTALL_QML ${QTAV_INSTALL_LIBS}/qml)
 +  set(QTAV_INSTALL_HEADERS ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "header install path")
 +  set(QTAV_INSTALL_LIBS ${CMAKE_INSTALL_PREFIX}/lib CACHE PATH "library install path")
 +  set(QTAV_INSTALL_BINS ${CMAKE_INSTALL_PREFIX}/bin CACHE PATH "binary install path")

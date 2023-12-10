@@ -1,0 +1,28 @@
+diff -up QtAV-master/src/codec/video/VideoDecoderFFmpeg.cpp.omv~ QtAV-master/src/codec/video/VideoDecoderFFmpeg.cpp
+--- QtAV-master/src/codec/video/VideoDecoderFFmpeg.cpp.omv~	2023-12-10 23:58:23.709436078 +0100
++++ QtAV-master/src/codec/video/VideoDecoderFFmpeg.cpp	2023-12-10 23:59:25.271184799 +0100
+@@ -83,9 +83,9 @@ public:
+     // flags. visualize motion vectors (MVs)
+     enum MotionVectorVisFlag {
+         No = 0, //default
+-        PF = FF_DEBUG_VIS_MV_P_FOR,
+-        BF = FF_DEBUG_VIS_MV_B_FOR,
+-        BB = FF_DEBUG_VIS_MV_B_BACK
++        //PF = FF_DEBUG_VIS_MV_P_FOR,
++        //BF = FF_DEBUG_VIS_MV_B_FOR,
++        //BB = FF_DEBUG_VIS_MV_B_BACK
+     };
+     Q_DECLARE_FLAGS(MotionVectorVisFlags, MotionVectorVisFlag)
+     enum BugFlag {
+diff -up QtAV-master/src/codec/video/VideoDecoderFFmpegHW.cpp.omv~ QtAV-master/src/codec/video/VideoDecoderFFmpegHW.cpp
+--- QtAV-master/src/codec/video/VideoDecoderFFmpegHW.cpp.omv~	2023-12-10 23:57:48.109003594 +0100
++++ QtAV-master/src/codec/video/VideoDecoderFFmpegHW.cpp	2023-12-10 23:57:53.203065458 +0100
+@@ -113,7 +113,7 @@ static void ffmpeg_release_va_buffer(str
+ bool VideoDecoderFFmpegHWPrivate::prepare()
+ {
+     //// From vlc begin
+-    codec_ctx->thread_safe_callbacks = true; //?
++    //codec_ctx->thread_safe_callbacks = true; //?
+     codec_ctx->thread_count = threads;
+ #ifdef _MSC_VER
+ #pragma warning(disable:4065) //vc: switch has default but no case

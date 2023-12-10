@@ -1,21 +1,26 @@
 %define major 1
-%define libname %mklibname QtAV %{major}
+%define oldlibname %mklibname QtAV 1
+%define libname %mklibname QtAV
 %define devname %mklibname QtAV -d
-%define wlibname %mklibname QtAVWidgets %{major}
+%define oldwlibname %mklibname QtAVWidgets 1
+%define wlibname %mklibname QtAVWidgets
 %define wdevname %mklibname QtAVWidgets -d
 
 %define oname QtAV
 
 Name: qtav
 Version: 1.13.0
-Release: 5
-Source0: https://github.com/wang-bin/QtAV/archive/v%{version}/%{oname}-%{version}.tar.gz
+Release: 6
+# Upstream is dead:
+#Source0: https://github.com/wang-bin/QtAV/archive/v%{version}/%{oname}-%{version}.tar.gz
+# But there is a semi-maintained fork
+# This is commit 256343f130ed69a815a4e598202420e343e5132f
+Source0: https://github.com/cmguo/QtAV/archive/refs/heads/master.tar.gz
 Source1: https://github.com/wang-bin/capi/archive/6a5f3006533b79aa57a3a54cf9df4442a356dd48.tar.gz
 Source2: https://github.com/BYVoid/uchardet/archive/016eb18437793fbdd31149e1fe9fd73df3430d0f.tar.gz
 Patch0: QtAV-1.12.0-linkage.patch
 Patch1: qtav-1.12.0-fs-prefixes.patch
-Patch2:	QtAV-1.13.0-fix-build-with-qt-5.14.patch
-Patch3: qtav-1.13.0-qt-5.15.patch
+Patch2: QtAV-ffmpeg-6.1.patch
 Summary: Multimedia playback framework based on Qt and FFmpeg
 URL: http://qtav.org/
 License: LGPL
@@ -40,6 +45,7 @@ Multimedia playback framework based on Qt and FFmpeg
 %package -n %{libname}
 Summary: Multimedia playback framework based on Qt and FFmpeg
 Group: System/Libraries
+%rename %{oldlibname}
 
 %description -n %{libname}
 Multimedia playback framework based on Qt and FFmpeg
@@ -56,6 +62,7 @@ a multimedia playback framework based on Qt and FFmpeg
 %package -n %{wlibname}
 Summary: Multimedia playback framework based on QtWidgets and FFmpeg
 Group: System/Libraries
+%rename %{oldwlibname}
 
 %description -n %{wlibname}
 Multimedia playback framework based on QtWidgets and FFmpeg
@@ -70,7 +77,7 @@ Development files (Headers etc.) for %{name},
 a multimedia playback framework based on QtWidgets and FFmpeg
 
 %prep
-%setup -q -n %{oname}-%{version} -a 1 -a 2
+%setup -q -n %{oname}-master -a 1 -a 2
 %autopatch -p1
 rmdir contrib/capi contrib/uchardet
 mv capi-* contrib/capi
