@@ -10,7 +10,7 @@
 
 Name: qtav
 Version: 1.13.0
-Release: 6
+Release: 7
 # Upstream is dead:
 #Source0: https://github.com/wang-bin/QtAV/archive/v%{version}/%{oname}-%{version}.tar.gz
 # But there is a semi-maintained fork
