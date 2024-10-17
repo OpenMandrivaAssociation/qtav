@@ -22,7 +22,7 @@ Patch0: QtAV-1.12.0-linkage.patch
 Patch1: qtav-1.12.0-fs-prefixes.patch
 Patch2: QtAV-ffmpeg-6.1.patch
 Summary: Multimedia playback framework based on Qt and FFmpeg
-URL: http://qtav.org/
+URL: https://qtav.org/
 License: LGPL
 Group: System/Libraries
 BuildRequires: qmake5
